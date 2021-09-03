@@ -17,6 +17,8 @@
 		A5CDEE6F26E215A800D305C6 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE6E26E215A800D305C6 /* ContactsViewController.swift */; };
 		A5CDEE7226E215BB00D305C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE7126E215BB00D305C6 /* LoginViewController.swift */; };
 		A5CDEE7926E21D0600D305C6 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE7826E21D0600D305C6 /* DetailsViewController.swift */; };
+		A5CDEE8626E2A87B00D305C6 /* ContactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE8426E2A87B00D305C6 /* ContactsCollectionViewCell.swift */; };
+		A5CDEE8726E2A87B00D305C6 /* ContactsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CDEE8526E2A87B00D305C6 /* ContactsCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A5CDEE6E26E215A800D305C6 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A5CDEE7126E215BB00D305C6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A5CDEE7826E21D0600D305C6 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		A5CDEE8426E2A87B00D305C6 /* ContactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5CDEE8526E2A87B00D305C6 /* ContactsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +71,8 @@
 				A5CDEE4E26E214D700D305C6 /* AppDelegate.swift */,
 				A5CDEE5026E214D700D305C6 /* SceneDelegate.swift */,
 				A5CDEE6A26E2153200D305C6 /* Models */,
-				A5CDEE7426E215C300D305C6 /* Flows */,
 				A5CDEE5426E214D700D305C6 /* Main.storyboard */,
+				A5CDEE7426E215C300D305C6 /* Flows */,
 				A5CDEE5A26E214DB00D305C6 /* Assets.xcassets */,
 				A5CDEE5C26E214DB00D305C6 /* LaunchScreen.storyboard */,
 				A5CDEE5F26E214DB00D305C6 /* Info.plist */,
@@ -107,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CDEE6E26E215A800D305C6 /* ContactsViewController.swift */,
+				A5CDEE8926E2A88400D305C6 /* Cell */,
 			);
 			path = ContactsList;
 			sourceTree = "<group>";
@@ -117,6 +122,15 @@
 				A5CDEE7826E21D0600D305C6 /* DetailsViewController.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		A5CDEE8926E2A88400D305C6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A5CDEE8426E2A87B00D305C6 /* ContactsCollectionViewCell.swift */,
+				A5CDEE8526E2A87B00D305C6 /* ContactsCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CDEE5E26E214DB00D305C6 /* LaunchScreen.storyboard in Resources */,
+				A5CDEE8726E2A87B00D305C6 /* ContactsCollectionViewCell.xib in Resources */,
 				A5CDEE5B26E214DB00D305C6 /* Assets.xcassets in Resources */,
 				A5CDEE5626E214D700D305C6 /* Main.storyboard in Resources */,
 			);
@@ -191,6 +206,7 @@
 			files = (
 				A5CDEE7226E215BB00D305C6 /* LoginViewController.swift in Sources */,
 				A5CDEE5926E214D700D305C6 /* ContactsList.xcdatamodeld in Sources */,
+				A5CDEE8626E2A87B00D305C6 /* ContactsCollectionViewCell.swift in Sources */,
 				A5CDEE6826E2152A00D305C6 /* Contact.swift in Sources */,
 				A5CDEE4F26E214D700D305C6 /* AppDelegate.swift in Sources */,
 				A5CDEE7926E21D0600D305C6 /* DetailsViewController.swift in Sources */,

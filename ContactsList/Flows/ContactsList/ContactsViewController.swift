@@ -35,10 +35,52 @@ import UIKit
 
 class ContactsViewController: UIViewController {
 
+    private let ContactsCellNibName = "ContactsCollectionViewCell"
+    private let ContactsCellIdn = "contactCell"
+
+    @IBOutlet private weak var collectionView: UICollectionView? {
+        didSet {
+            collectionView?.delegate = self
+            collectionView?.dataSource = self
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // setup
+        registerCells()
     }
 
+    private func registerCells() {
+        collectionView?.register(UINib(nibName: ContactsCellNibName, bundle: nil), forCellWithReuseIdentifier: ContactsCellIdn)
+    }
+
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        guard let loginVC = storyboard?.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else { return }
+        let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
+        window?.rootViewController = loginVC
+        window?.makeKeyAndVisible()
+    }
 }
+
+
+// MARK: - CollectionView Delegate & Data Source
+
+extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetailsVC", sender: nil)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 24
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCellIdn, for: indexPath) as? ContactsCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
+}
+
