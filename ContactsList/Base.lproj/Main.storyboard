@@ -249,7 +249,7 @@
             </objects>
             <point key="canvasLocation" x="-416" y="150"/>
         </scene>
-        <!--Contacts-->
+        <!--Contacts View Controller-->
         <scene sceneID="oyx-iW-grh">
             <objects>
                 <viewController storyboardIdentifier="ContactsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wOJ-wa-jhs" customClass="ContactsViewController" customModule="ContactsList" customModuleProvider="target" sceneMemberID="viewController">
@@ -257,14 +257,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7N-2n-miH">
-                                <rect key="frame" x="20" y="40" width="374" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7N-2n-miH">
+                                <rect key="frame" x="20" y="20" width="374" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f2E-48-Fv9">
-                                <rect key="frame" x="0.0" y="121" width="414" height="653"/>
+                                <rect key="frame" x="0.0" y="81" width="414" height="693"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="cH4-NX-e2I">
                                     <size key="itemSize" width="118" height="125"/>
@@ -291,15 +291,15 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="k7N-2n-miH" firstAttribute="leading" secondItem="ni7-eJ-Ogf" secondAttribute="leading" constant="20" id="4qa-2S-oLr"/>
-                            <constraint firstItem="k7N-2n-miH" firstAttribute="top" secondItem="ni7-eJ-Ogf" secondAttribute="top" constant="40" id="HNd-S4-fAa"/>
+                            <constraint firstItem="k7N-2n-miH" firstAttribute="top" secondItem="ni7-eJ-Ogf" secondAttribute="top" constant="20" id="HNd-S4-fAa"/>
                             <constraint firstItem="f2E-48-Fv9" firstAttribute="leading" secondItem="ni7-eJ-Ogf" secondAttribute="leading" id="JhL-vY-KeE"/>
-                            <constraint firstItem="f2E-48-Fv9" firstAttribute="top" secondItem="k7N-2n-miH" secondAttribute="bottom" constant="40" id="Y1H-ei-jH2"/>
+                            <constraint firstItem="f2E-48-Fv9" firstAttribute="top" secondItem="k7N-2n-miH" secondAttribute="bottom" constant="20" id="Y1H-ei-jH2"/>
                             <constraint firstItem="ni7-eJ-Ogf" firstAttribute="trailing" secondItem="k7N-2n-miH" secondAttribute="trailing" constant="20" id="bOa-dt-Sa2"/>
                             <constraint firstItem="f2E-48-Fv9" firstAttribute="trailing" secondItem="ni7-eJ-Ogf" secondAttribute="trailing" id="gIG-In-mC0"/>
                             <constraint firstItem="f2E-48-Fv9" firstAttribute="bottom" secondItem="ni7-eJ-Ogf" secondAttribute="bottom" id="lhT-h2-Ths"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="wma-kb-o9A">
+                    <navigationItem key="navigationItem" id="wma-kb-o9A">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.uturn.left" catalog="system" id="uAu-m5-Qra">
                             <color key="tintColor" systemColor="systemIndigoColor"/>
                             <connections>
@@ -315,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="1069.5652173913045" y="150"/>
         </scene>
-        <!--Details-->
+        <!--Details View Controller-->
         <scene sceneID="ldD-gG-hBa">
             <objects>
                 <viewController storyboardIdentifier="DetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8j5-de-GEa" customClass="DetailsViewController" customModule="ContactsList" customModuleProvider="target" sceneMemberID="viewController">
@@ -323,23 +323,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Details View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43M-QG-P84">
-                                <rect key="frame" x="43" y="157" width="329" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tHz-2K-JcX">
+                                <rect key="frame" x="40" y="20.5" width="334" height="333"/>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tHz-2K-JcX" secondAttribute="height" multiplier="1:1" id="Y3O-ND-7sm"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="William Robins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43M-QG-P84">
+                                <rect key="frame" x="40" y="374" width="334" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tHz-2K-JcX">
-                                <rect key="frame" x="43" y="283" width="329" height="330"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemIndigoColor"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FR1-Q6-CLK"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="43M-QG-P84" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="BYl-A8-cby"/>
+                            <constraint firstItem="tHz-2K-JcX" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="20" id="LAF-BY-P9f"/>
+                            <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="43M-QG-P84" secondAttribute="trailing" constant="40" id="WjN-HJ-Rbx"/>
+                            <constraint firstItem="tHz-2K-JcX" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="eVB-SV-LDC"/>
+                            <constraint firstItem="43M-QG-P84" firstAttribute="top" secondItem="tHz-2K-JcX" secondAttribute="bottom" constant="20" id="tgS-7M-lDL"/>
+                            <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="tHz-2K-JcX" secondAttribute="trailing" constant="40" id="wUt-jL-uCO"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" id="vQV-eD-dmh"/>
+                    <navigationItem key="navigationItem" id="vQV-eD-dmh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XY-Zv-Hdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
