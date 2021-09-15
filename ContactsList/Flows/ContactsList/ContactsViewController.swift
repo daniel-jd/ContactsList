@@ -28,15 +28,15 @@
  */
 
 import UIKit
-import CoreData
 
 class ContactsViewController: UIViewController {
-// MARK: - Properties
+
+    // MARK: - Properties
     private let ContactsCellNibName = "ContactsCollectionViewCell"
     private let ContactsCellIdn = "contactCell"
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var contacts: [Contact] = []
 
-    var contactsList: [Contact] = []
+    let contactsManager = ContactsManager.shared
 
     @IBOutlet private weak var collectionView: UICollectionView? {
         didSet {
@@ -46,56 +46,30 @@ class ContactsViewController: UIViewController {
     }
 
 // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
 
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-
+        contactsManager.fillContactsList()
+        contacts = contactsManager.contactsList
         registerCells()
-        makeContact()
-        loadContacts()
     }
+
+// MARK: - Methods
 
     private func registerCells() {
         collectionView?.register(UINib(nibName: ContactsCellNibName, bundle: nil), forCellWithReuseIdentifier: ContactsCellIdn)
     }
 
-// MARK: - Methods
-        func makeContact() {
-            let newContact = Contact(context: context)
-            newContact.name = "Dan"
-            newContact.lastName = "Appleseed"
-            newContact.phoneNumber = "380638009070"
-            saveContact()
-        }
-
-        func saveContact() {
-            do {
-                try context.save()
-                print("SAVED!")
-            } catch {
-                print("🔥 \(error)")
-            }
-        }
-
-        func loadContacts() {
-            let request: NSFetchRequest<Contact> = Contact.fetchRequest()
-            do {
-                contactsList = try context.fetch(request)
-                print("LOADED!")
-            } catch {
-                print("🔥 \(error)")
-            }
-        }
-
 // MARK: - IBActions
+
     @IBAction func logoutButtonPressed(_ sender: Any) {
         guard let loginVC = storyboard?.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else { return }
         let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
         window?.rootViewController = loginVC
         window?.makeKeyAndVisible()
     }
-
 }
 
 
@@ -104,13 +78,14 @@ class ContactsViewController: UIViewController {
 extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contactsList.count
+        return contacts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DetailsViewController") as? DetailsViewController
         else { return }
-        vc.contact = contactsList[indexPath.row]
+
+        vc.contact = contacts[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -118,9 +93,14 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCellIdn, for: indexPath) as? ContactsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.contactNameLabel.text = contactsList[indexPath.row].name! +
-            " " + contactsList[indexPath.row].lastName!
-        cell.contactImageView.image = UIImage(systemName: "person.crop.circle") // TODO: Avatar
+        let fullName = "\(contacts[indexPath.row].name ?? "Unknown")" +
+            " " + "\(contacts[indexPath.row].lastName ?? "")"
+        cell.contactNameLabel.text = fullName
+        if let imageData = contacts[indexPath.row].avatar {
+            cell.contactImageView.image = UIImage(data: imageData)
+        } else {
+            cell.contactImageView.image = UIImage(systemName: "person.crop.circle")
+        }
 
         return cell
     }

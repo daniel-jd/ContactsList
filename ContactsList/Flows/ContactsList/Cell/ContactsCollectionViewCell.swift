@@ -13,7 +13,7 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         didSet {
             contactImageView.layer.cornerRadius = contactImageView.frame.width / 2
             contactImageView.clipsToBounds = true
-            contactImageView.layer.borderColor = UIColor.white.cgColor
+            contactImageView.layer.borderColor = UIColor.systemIndigo.cgColor
             contactImageView.layer.borderWidth = 1.5
         }
     }

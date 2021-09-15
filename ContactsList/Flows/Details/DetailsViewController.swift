@@ -26,7 +26,12 @@ class DetailsViewController: UIViewController {
         let fullName = contact.name! + " " + contact.lastName!
         contactNameLabel.text = fullName
         contactPhoneNumber.text = contact.phoneNumber ?? "no number"
-        avatarView.image = UIImage(systemName: "person.crop.circle")
+        if let imageData = contact.avatar {
+            avatarView.image = UIImage(data: imageData)
+        } else {
+            avatarView.image = UIImage(systemName: "person.crop.circle")
+        }
+
     }
 
     func setupView() {
