@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
                 print("☀️ Loggedin State")
                 showHomeVC()
             case .loggedout:
-                print("🔥 Loggedout State")
+                print("🍄 Loggedout State")
                 loginWithFaceID()
             case .showPassCodePrompt:
                 print("🐷 Show PassCode State")

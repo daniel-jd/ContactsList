@@ -280,9 +280,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="118" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <connections>
-                                            <segue destination="8j5-de-GEa" kind="show" identifier="toDetailsVC" id="mBK-8f-kKb"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -320,19 +317,25 @@
             <objects>
                 <viewController storyboardIdentifier="DetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8j5-de-GEa" customClass="DetailsViewController" customModule="ContactsList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BL7-V8-rR0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tHz-2K-JcX">
-                                <rect key="frame" x="40" y="20.5" width="334" height="333"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tHz-2K-JcX">
+                                <rect key="frame" x="40" y="64.5" width="334" height="333"/>
                                 <color key="tintColor" systemColor="systemIndigoColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tHz-2K-JcX" secondAttribute="height" multiplier="1:1" id="Y3O-ND-7sm"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="William Robins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43M-QG-P84">
-                                <rect key="frame" x="40" y="374" width="334" height="41"/>
+                                <rect key="frame" x="40" y="418" width="334" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+38 063 8008080" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzf-uq-fSj">
+                                <rect key="frame" x="106.5" y="467" width="201.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -341,6 +344,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="43M-QG-P84" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="BYl-A8-cby"/>
+                            <constraint firstItem="Jzf-uq-fSj" firstAttribute="centerX" secondItem="BL7-V8-rR0" secondAttribute="centerX" id="DXu-Vx-JxR"/>
+                            <constraint firstItem="Jzf-uq-fSj" firstAttribute="top" secondItem="43M-QG-P84" secondAttribute="bottom" constant="8" symbolic="YES" id="FmH-p1-OUC"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="20" id="LAF-BY-P9f"/>
                             <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="43M-QG-P84" secondAttribute="trailing" constant="40" id="WjN-HJ-Rbx"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="eVB-SV-LDC"/>
@@ -349,10 +354,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vQV-eD-dmh"/>
+                    <connections>
+                        <outlet property="avatarView" destination="tHz-2K-JcX" id="uNW-QN-u1a"/>
+                        <outlet property="contactNameLabel" destination="43M-QG-P84" id="An3-tL-xaB"/>
+                        <outlet property="contactPhoneNumber" destination="Jzf-uq-fSj" id="M8U-jL-TkK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XY-Zv-Hdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="150"/>
+            <point key="canvasLocation" x="1800.0000000000002" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rb8-vb-JCQ">
@@ -382,7 +392,7 @@
         <image name="arrow.uturn.left" catalog="system" width="128" height="112"/>
         <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
