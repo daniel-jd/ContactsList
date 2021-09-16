@@ -280,6 +280,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="118" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <segue destination="8j5-de-GEa" kind="presentation" identifier="toDetailsVC" customClass="CustomAnimationStoryboardSegue" customModule="ContactsList" customModuleProvider="target" modalPresentationStyle="fullScreen" id="muT-Ka-l1R"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -339,6 +342,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNF-fS-Y6S">
+                                <rect key="frame" x="20" y="55.5" width="20" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="hSw-5K-DZ5"/>
+                                    <constraint firstAttribute="width" constant="20" id="vqT-IH-byv"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="backgroundImage" image="chevron.backward" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="8j5-de-GEa" eventType="touchUpInside" id="xnT-81-1e0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FR1-Q6-CLK"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -346,9 +364,11 @@
                             <constraint firstItem="43M-QG-P84" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="BYl-A8-cby"/>
                             <constraint firstItem="Jzf-uq-fSj" firstAttribute="centerX" secondItem="BL7-V8-rR0" secondAttribute="centerX" id="DXu-Vx-JxR"/>
                             <constraint firstItem="Jzf-uq-fSj" firstAttribute="top" secondItem="43M-QG-P84" secondAttribute="bottom" constant="8" symbolic="YES" id="FmH-p1-OUC"/>
+                            <constraint firstItem="RNF-fS-Y6S" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="12" id="JSd-Gv-iFy"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="20" id="LAF-BY-P9f"/>
                             <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="43M-QG-P84" secondAttribute="trailing" constant="40" id="WjN-HJ-Rbx"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="eVB-SV-LDC"/>
+                            <constraint firstItem="RNF-fS-Y6S" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="20" id="lyD-cQ-zVE"/>
                             <constraint firstItem="43M-QG-P84" firstAttribute="top" secondItem="tHz-2K-JcX" secondAttribute="bottom" constant="20" id="tgS-7M-lDL"/>
                             <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="tHz-2K-JcX" secondAttribute="trailing" constant="40" id="wUt-jL-uCO"/>
                         </constraints>
@@ -390,6 +410,7 @@
     </scenes>
     <resources>
         <image name="arrow.uturn.left" catalog="system" width="128" height="112"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>

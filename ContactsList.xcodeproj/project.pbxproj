@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A54873B426F235BC007C9F48 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54873B326F235BC007C9F48 /* ContactsManager.swift */; };
+		A55090A526F34229001F89A9 /* CustomAnimationStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090A426F34229001F89A9 /* CustomAnimationStoryboardSegue.swift */; };
+		A55090A826F34373001F89A9 /* CustomPresenterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090A726F34373001F89A9 /* CustomPresenterAnimator.swift */; };
+		A55090AC26F343A3001F89A9 /* CustomDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090AB26F343A3001F89A9 /* CustomDismissAnimator.swift */; };
 		A554D36926E3728600E1905D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554D36826E3728600E1905D /* Credentials.swift */; };
 		A554D36F26E3945200E1905D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554D36E26E3945100E1905D /* KeychainHelper.swift */; };
 		A5CDEE4F26E214D700D305C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE4E26E214D700D305C6 /* AppDelegate.swift */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		A54873B326F235BC007C9F48 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
+		A55090A426F34229001F89A9 /* CustomAnimationStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationStoryboardSegue.swift; sourceTree = "<group>"; };
+		A55090A726F34373001F89A9 /* CustomPresenterAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresenterAnimator.swift; sourceTree = "<group>"; };
+		A55090AB26F343A3001F89A9 /* CustomDismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDismissAnimator.swift; sourceTree = "<group>"; };
 		A554D36826E3728600E1905D /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		A554D36E26E3945100E1905D /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A5CDEE4B26E214D700D305C6 /* ContactsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +67,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		A55090A326F3410F001F89A9 /* SegueAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A55090A426F34229001F89A9 /* CustomAnimationStoryboardSegue.swift */,
+				A55090A726F34373001F89A9 /* CustomPresenterAnimator.swift */,
+				A55090AB26F343A3001F89A9 /* CustomDismissAnimator.swift */,
+			);
+			path = SegueAnimation;
+			sourceTree = "<group>";
+		};
 		A554D36B26E3729700E1905D /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,10 +107,10 @@
 			children = (
 				A5CDEE4E26E214D700D305C6 /* AppDelegate.swift */,
 				A5CDEE5026E214D700D305C6 /* SceneDelegate.swift */,
+				A55090A326F3410F001F89A9 /* SegueAnimation */,
 				A54873B226F235A4007C9F48 /* Services */,
 				A554D36B26E3729700E1905D /* Security */,
 				A5CDEE6A26E2153200D305C6 /* Models */,
-				A5CDEE5426E214D700D305C6 /* Main.storyboard */,
 				A5CDEE7426E215C300D305C6 /* Flows */,
 				A5CDEE5A26E214DB00D305C6 /* Assets.xcassets */,
 				A5CDEE5C26E214DB00D305C6 /* LaunchScreen.storyboard */,
@@ -117,6 +133,7 @@
 				A5CDEE7526E215CC00D305C6 /* Login */,
 				A5CDEE7626E215D200D305C6 /* ContactsList */,
 				A5CDEE7C26E21D1600D305C6 /* Details */,
+				A5CDEE5426E214D700D305C6 /* Main.storyboard */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -227,12 +244,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CDEE7226E215BB00D305C6 /* LoginViewController.swift in Sources */,
+				A55090AC26F343A3001F89A9 /* CustomDismissAnimator.swift in Sources */,
+				A55090A826F34373001F89A9 /* CustomPresenterAnimator.swift in Sources */,
 				A5CDEE5926E214D700D305C6 /* ContactsList.xcdatamodeld in Sources */,
 				A5CDEE8626E2A87B00D305C6 /* ContactsCollectionViewCell.swift in Sources */,
 				A554D36F26E3945200E1905D /* KeychainHelper.swift in Sources */,
 				A554D36926E3728600E1905D /* Credentials.swift in Sources */,
 				A5CDEE4F26E214D700D305C6 /* AppDelegate.swift in Sources */,
 				A54873B426F235BC007C9F48 /* ContactsManager.swift in Sources */,
+				A55090A526F34229001F89A9 /* CustomAnimationStoryboardSegue.swift in Sources */,
 				A5CDEE7926E21D0600D305C6 /* DetailsViewController.swift in Sources */,
 				A5CDEE5126E214D700D305C6 /* SceneDelegate.swift in Sources */,
 				A5CDEE6F26E215A800D305C6 /* ContactsViewController.swift in Sources */,

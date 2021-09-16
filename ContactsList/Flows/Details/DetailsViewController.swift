@@ -13,13 +13,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var contactNameLabel: UILabel!
     @IBOutlet weak var contactPhoneNumber: UILabel!
 
-    var contact: Contact!
+    var contact: Contact?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
-        showContactDetails(contact: contact)
+        if contact != nil {
+            showContactDetails(contact: contact!)
+        }
     }
 
     func showContactDetails(contact: Contact) {
@@ -38,5 +40,8 @@ class DetailsViewController: UIViewController {
         avatarView.layer.cornerRadius = avatarView.frame.width / 2
     }
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 
 }

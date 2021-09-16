@@ -35,6 +35,7 @@ class ContactsViewController: UIViewController {
     private let ContactsCellNibName = "ContactsCollectionViewCell"
     private let ContactsCellIdn = "contactCell"
     var contacts: [Contact] = []
+    var currentContact: Contact?
 
     let contactsManager = ContactsManager.shared
 
@@ -62,6 +63,12 @@ class ContactsViewController: UIViewController {
         collectionView?.register(UINib(nibName: ContactsCellNibName, bundle: nil), forCellWithReuseIdentifier: ContactsCellIdn)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            guard segue.identifier == "toDetailsVC" else { return }
+            guard let destination = segue.destination as? DetailsViewController else { return }
+            destination.contact = currentContact
+        }
+
 // MARK: - IBActions
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
@@ -82,11 +89,8 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DetailsViewController") as? DetailsViewController
-        else { return }
-
-        vc.contact = contacts[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        currentContact = contacts[indexPath.row]
+        performSegue(withIdentifier: "toDetailsVC", sender: nil)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
