@@ -19,18 +19,22 @@ final class KeychainHelper {
         return SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenUnlockedThisDeviceOnly, .userPresence, nil)!
     }
 
-    static func save() {
-
+    static func isPasscodeSet() -> Bool {
+        return false
     }
 
-    static func checkForPasscode(_ userCredential: Credentials) {
+    static func checkForPasscode(_ userCredential: Credentials) throws {
 
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
                                     kSecAttrCreator as String: userCredential.user,
                                     kSecValueData as String: userCredential.passcode]
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        guard status != errSecItemNotFound else { throw KeychainError.noPasscode }
+        guard status == errSecSuccess else { throw KeychainError.unhandledError(status: status) }
     }
 
-    static func setPasscode(_ userCredential: Credentials) {
+    static func setPasscode(_ userCredential: Credentials) throws {
 
         let passcodeData = userCredential.passcode.data(using: String.Encoding.utf8)!
         let user = userCredential.user.data(using: String.Encoding.utf8)!
@@ -40,8 +44,8 @@ final class KeychainHelper {
                                     kSecValueData as String: passcodeData]
 
         let status = SecItemAdd(query as CFDictionary, nil)
-//        guard status == errSecSuccess else {
-//            throw KeychainError.unhandledError(status: status)
-//        }
+        guard status == errSecSuccess else {
+            throw KeychainError.unhandledError(status: status)
+        }
     }
 }

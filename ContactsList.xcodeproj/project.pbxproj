@@ -12,6 +12,7 @@
 		A55090A826F34373001F89A9 /* CustomPresenterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090A726F34373001F89A9 /* CustomPresenterAnimator.swift */; };
 		A55090AC26F343A3001F89A9 /* CustomDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090AB26F343A3001F89A9 /* CustomDismissAnimator.swift */; };
 		A55090B126F369EA001F89A9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090B026F369EA001F89A9 /* MapViewController.swift */; };
+		A55090B526F3B06B001F89A9 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55090B426F3B06B001F89A9 /* LoginManager.swift */; };
 		A554D36926E3728600E1905D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554D36826E3728600E1905D /* Credentials.swift */; };
 		A554D36F26E3945200E1905D /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554D36E26E3945100E1905D /* KeychainHelper.swift */; };
 		A5CDEE4F26E214D700D305C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CDEE4E26E214D700D305C6 /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 		A55090A726F34373001F89A9 /* CustomPresenterAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresenterAnimator.swift; sourceTree = "<group>"; };
 		A55090AB26F343A3001F89A9 /* CustomDismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDismissAnimator.swift; sourceTree = "<group>"; };
 		A55090B026F369EA001F89A9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A55090B426F3B06B001F89A9 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		A554D36826E3728600E1905D /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		A554D36E26E3945100E1905D /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A5CDEE4B26E214D700D305C6 /* ContactsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CDEE7126E215BB00D305C6 /* LoginViewController.swift */,
+				A55090B426F3B06B001F89A9 /* LoginManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				A55090A826F34373001F89A9 /* CustomPresenterAnimator.swift in Sources */,
 				A5CDEE5926E214D700D305C6 /* ContactsList.xcdatamodeld in Sources */,
 				A5CDEE8626E2A87B00D305C6 /* ContactsCollectionViewCell.swift in Sources */,
+				A55090B526F3B06B001F89A9 /* LoginManager.swift in Sources */,
 				A554D36F26E3945200E1905D /* KeychainHelper.swift in Sources */,
 				A554D36926E3728600E1905D /* Credentials.swift in Sources */,
 				A5CDEE4F26E214D700D305C6 /* AppDelegate.swift in Sources */,

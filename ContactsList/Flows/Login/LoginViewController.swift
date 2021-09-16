@@ -21,20 +21,12 @@
 import UIKit
 import LocalAuthentication
 
-extension UIButton {
+class LoginViewController: UIViewController, LoginManagerDelegate {
 
-    func digitButtonStyle() {
-        self.layer.cornerRadius = self.frame.width / 2
-        self.backgroundColor = .clear
-        self.layer.borderColor = UIColor.systemIndigo.cgColor
-        self.layer.borderWidth = 1.5
-    }
-}
-
-class LoginViewController: UIViewController {
-
+    @IBOutlet weak var passcodeInfoLabel: UILabel!
+    
+    @IBOutlet var inputLabel: [UILabel]!
     @IBOutlet weak var digitButton: UIButton!
-
     @IBOutlet var digits: [UIButton]! {
         didSet {
             let digitFont = UIFont.systemFont(ofSize: 40, weight: .thin)
@@ -43,17 +35,17 @@ class LoginViewController: UIViewController {
                 let digitValue = String(button.tag)
                 button.titleLabel?.font = digitFont
                 button.setTitle(digitValue, for: .normal)
-//                button.setTitleColor(.systemIndigo, for: .normal)
             }
         }
     }
 
-    private enum VCstate {
-        case loggedin, loggedout, showPassCodePrompt, normal
+    var loginManager = LoginManager() {
+        didSet {
+            loginManager.delegate = self
+        }
     }
 
-    private var state: VCstate = .loggedout {
-
+    internal var state: VCstate = .loggedout {
         didSet {
             switch state {
             case .loggedin:
@@ -61,28 +53,33 @@ class LoginViewController: UIViewController {
                 showHomeVC()
             case .loggedout:
                 print("🍄 Loggedout State")
-                loginWithFaceID()
+                loginManager.loginWithFaceID()
             case .showPassCodePrompt:
-                print("🐷 Show PassCode State")
-                // Show PassCodeVC
+                print("🐷 Prompt Passcode")
+                promptPasscode()
             case .normal:
                 print("🐶 Normal State")
             }
         }
     }
 
-    var context = LAContext()
+// MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         digitButton.digitButtonStyle()
 
-        context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-
-        state = .loggedout
+        let isPasscodeSet = KeychainHelper.isPasscodeSet()
+        if !isPasscodeSet {
+            state = .showPassCodePrompt
+        } else {
+            state = .loggedout
+        }
 
     }
+
+// MARK: - Methods
 
     private func showHomeVC() {
         guard let homeVC = storyboard?.instantiateViewController(identifier: "ContactsViewController") as? ContactsViewController else { return }
@@ -91,32 +88,19 @@ class LoginViewController: UIViewController {
         window?.makeKeyAndVisible()
     }
 
-    private func loginWithFaceID() {
+    private func promptPasscode() {
 
-        context = LAContext()
-        context.localizedCancelTitle = "Enter Username/Password"
-
-        // First check if we have the needed hardware support.
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-
-            let reason = "Log in to your account"
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
-
-                if success {
-
-                    // Move to the main thread because a state update triggers UI changes.
-                    DispatchQueue.main.async { [unowned self] in
-                        self.state = .loggedin
-                    }
-
-                } else {
-                    print(error?.localizedDescription ?? "Failed to authenticate")
-                }
-            }
-        } else {
-            print(error?.localizedDescription ?? "Can't evaluate policy")
-        }
     }
 
+}
+
+// MARK: - UIButton Extension
+
+extension UIButton {
+    func digitButtonStyle() {
+        self.layer.cornerRadius = self.frame.width / 2
+        self.backgroundColor = .clear
+        self.layer.borderColor = UIColor.systemIndigo.cgColor
+        self.layer.borderWidth = 1.5
+    }
 }
