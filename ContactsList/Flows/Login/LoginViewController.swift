@@ -16,7 +16,7 @@
  Просимо  авторизуватись за допомогою faceid/touch id
  Якщо не дозволений  faceid/touch id, показуємо клавіатуру
  Якщо користувач не зміг авторизуватись за допомогою  faceid/touch id - покзауємо скрін з клавіатурою.
-*/
+ */
 
 import UIKit
 import LocalAuthentication
@@ -24,9 +24,8 @@ import LocalAuthentication
 class LoginViewController: UIViewController, LoginManagerDelegate {
 
     @IBOutlet weak var passcodeInfoLabel: UILabel!
-    
     @IBOutlet var inputLabel: [UILabel]!
-    @IBOutlet weak var digitButton: UIButton!
+
     @IBOutlet var digits: [UIButton]! {
         didSet {
             let digitFont = UIFont.systemFont(ofSize: 40, weight: .thin)
@@ -39,11 +38,13 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         }
     }
 
-    var loginManager = LoginManager() {
+    private var loginManager = LoginManager() {
         didSet {
             loginManager.delegate = self
         }
     }
+
+    private var passcodeEntry = ""
 
     internal var state: VCstate = .loggedout {
         didSet {
@@ -63,13 +64,12 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         }
     }
 
-// MARK: - Lifecycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        digitButton.digitButtonStyle()
-
+        setBullets()
         let isPasscodeSet = KeychainHelper.isPasscodeSet()
         if !isPasscodeSet {
             state = .showPassCodePrompt
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
 
     }
 
-// MARK: - Methods
+    // MARK: - Methods
 
     private func showHomeVC() {
         guard let homeVC = storyboard?.instantiateViewController(identifier: "ContactsViewController") as? ContactsViewController else { return }
@@ -89,9 +89,36 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
     }
 
     private func promptPasscode() {
-
+        passcodeInfoLabel.text = "Enter Passcode"
     }
 
+    private func setBullets() {
+        inputLabel.forEach { label in
+            label.text = "○"
+        }
+    }
+
+    private var inputCounter = 0
+
+    @IBAction func digitButtonPressed(_ sender: UIButton) {
+        if inputCounter < 6 {
+            let digit = String(sender.tag)
+            inputLabel[inputCounter].text = "●"
+            passcodeEntry.append(digit)
+            inputCounter += 1
+        } else {
+            return
+        }
+        print(passcodeEntry)
+    }
+
+    @IBAction func deleteDigitPressed(_ sender: Any) {
+        print("Backspace pressed")
+    }
+
+    @IBAction func faceIDButtonPressed(_ sender: Any) {
+        print("Face ID pressed")
+    }
 }
 
 // MARK: - UIButton Extension

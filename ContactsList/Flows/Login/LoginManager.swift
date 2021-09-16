@@ -16,17 +16,17 @@ enum VCstate {
     case loggedin, loggedout, showPassCodePrompt, normal
 }
 
-final class LoginManager {
+struct LoginManager {
 
     var context = LAContext()
     weak var delegate: LoginManagerDelegate?
 
-    func evaluatePolicy() {
+    mutating func evaluatePolicy() {
         context = LAContext()
         context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
     }
 
-    func loginWithFaceID() {
+    mutating func loginWithFaceID() {
 
         context = LAContext()
         context.localizedCancelTitle = "Enter Username/Password"
@@ -36,10 +36,10 @@ final class LoginManager {
 
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             let reason = "Log in to your account"
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { [self] success, error in
                 if success {
                     // Move to the main thread because a state update triggers UI changes.
-                    DispatchQueue.main.async { [unowned self] in
+                    DispatchQueue.main.async { [self] in
                         delegate?.state = .loggedin
                     }
                 } else {
