@@ -330,7 +330,7 @@
                                     <constraint firstAttribute="width" secondItem="tHz-2K-JcX" secondAttribute="height" multiplier="1:1" id="Y3O-ND-7sm"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="William Robins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43M-QG-P84">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43M-QG-P84">
                                 <rect key="frame" x="40" y="418" width="334" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -357,6 +357,18 @@
                                     <action selector="backButtonPressed:" destination="8j5-de-GEa" eventType="touchUpInside" id="xnT-81-1e0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4MH-J2-gpg">
+                                <rect key="frame" x="182" y="616.5" width="50" height="48.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oSj-9z-zBB"/>
+                                    <constraint firstAttribute="width" constant="50" id="vqN-s2-IeH"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                <state key="normal" backgroundImage="map.fill" catalog="system"/>
+                                <connections>
+                                    <segue destination="PuW-aF-yoa" kind="presentation" modalPresentationStyle="fullScreen" id="IeN-t2-GA4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FR1-Q6-CLK"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -366,7 +378,9 @@
                             <constraint firstItem="Jzf-uq-fSj" firstAttribute="top" secondItem="43M-QG-P84" secondAttribute="bottom" constant="8" symbolic="YES" id="FmH-p1-OUC"/>
                             <constraint firstItem="RNF-fS-Y6S" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="12" id="JSd-Gv-iFy"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="top" secondItem="FR1-Q6-CLK" secondAttribute="top" constant="20" id="LAF-BY-P9f"/>
+                            <constraint firstItem="4MH-J2-gpg" firstAttribute="centerX" secondItem="BL7-V8-rR0" secondAttribute="centerX" id="QLR-su-Fex"/>
                             <constraint firstItem="FR1-Q6-CLK" firstAttribute="trailing" secondItem="43M-QG-P84" secondAttribute="trailing" constant="40" id="WjN-HJ-Rbx"/>
+                            <constraint firstItem="4MH-J2-gpg" firstAttribute="top" secondItem="Jzf-uq-fSj" secondAttribute="bottom" constant="120" id="c1A-xs-IOb"/>
                             <constraint firstItem="tHz-2K-JcX" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="40" id="eVB-SV-LDC"/>
                             <constraint firstItem="RNF-fS-Y6S" firstAttribute="leading" secondItem="FR1-Q6-CLK" secondAttribute="leading" constant="20" id="lyD-cQ-zVE"/>
                             <constraint firstItem="43M-QG-P84" firstAttribute="top" secondItem="tHz-2K-JcX" secondAttribute="bottom" constant="20" id="tgS-7M-lDL"/>
@@ -383,6 +397,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XY-Zv-Hdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1800.0000000000002" y="150"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="bIl-bk-Isp">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="PuW-aF-yoa" customClass="MapViewController" customModule="ContactsList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qv2-wy-vTf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZZT-v2-4CJ">
+                                <rect key="frame" x="0.0" y="44" width="366" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="BHt-xp-JBC"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2I1-Om-AIx">
+                                <rect key="frame" x="366" y="48" width="40" height="35.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="NMF-mj-cqV"/>
+                                    <constraint firstAttribute="width" constant="40" id="zhN-Bk-mg9"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="x.circle" catalog="system" symbolScale="small"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="PuW-aF-yoa" eventType="touchUpInside" id="U62-Ez-ZFD"/>
+                                </connections>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wFC-Mf-32u">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PW3-2s-HBI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="wFC-Mf-32u" secondAttribute="bottom" id="5wi-Kl-ZnO"/>
+                            <constraint firstItem="ZZT-v2-4CJ" firstAttribute="top" secondItem="PW3-2s-HBI" secondAttribute="top" id="94q-Ey-IXs"/>
+                            <constraint firstItem="wFC-Mf-32u" firstAttribute="trailing" secondItem="PW3-2s-HBI" secondAttribute="trailing" id="9TY-NQ-SQH"/>
+                            <constraint firstItem="wFC-Mf-32u" firstAttribute="top" secondItem="ZZT-v2-4CJ" secondAttribute="bottom" id="Afq-Ol-2Kj"/>
+                            <constraint firstItem="2I1-Om-AIx" firstAttribute="leading" secondItem="ZZT-v2-4CJ" secondAttribute="trailing" id="CRA-SM-cCg"/>
+                            <constraint firstItem="PW3-2s-HBI" firstAttribute="trailing" secondItem="2I1-Om-AIx" secondAttribute="trailing" constant="8" id="Qqb-yQ-kgW"/>
+                            <constraint firstItem="wFC-Mf-32u" firstAttribute="leading" secondItem="PW3-2s-HBI" secondAttribute="leading" id="Rxi-GS-j32"/>
+                            <constraint firstItem="2I1-Om-AIx" firstAttribute="centerY" secondItem="ZZT-v2-4CJ" secondAttribute="centerY" id="UFW-mv-te6"/>
+                            <constraint firstItem="ZZT-v2-4CJ" firstAttribute="leading" secondItem="PW3-2s-HBI" secondAttribute="leading" id="haY-qA-myV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="wFC-Mf-32u" id="svc-id-IKn"/>
+                        <outlet property="searchBarPressed" destination="ZZT-v2-4CJ" id="g2d-TJ-gzl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nxc-im-itu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2515.9420289855075" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rb8-vb-JCQ">
@@ -413,9 +483,20 @@
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

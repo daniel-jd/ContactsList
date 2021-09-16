@@ -8,12 +8,6 @@
 import Foundation
 
 struct Credentials {
-    var username: String
-    var password: String
-}
-
-enum KeychainError: Error {
-    case noPassword
-    case unexpectedPasswordData
-    case unhandledError(status: OSStatus)
+    var user: String
+    var passcode: String
 }
