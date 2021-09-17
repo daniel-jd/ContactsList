@@ -30,6 +30,18 @@ struct LoginManager {
         return passcode == confirmCode ? true : false
     }
 
+    func savePasscodeToKeychain(_ passcode: String) {
+        let credentials = Credentials(user: "iphoneUser", passcode: passcode)
+        do {
+            try KeychainHelper.setPasscode(credentials)
+        } catch {
+            fatalError("🔥 Keychain error: \(error)")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            delegate?.state = .loggedin
+        }
+    }
+
     mutating func loginWithFaceID() {
 
         context = LAContext()

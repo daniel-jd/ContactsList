@@ -25,7 +25,6 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
 
     @IBOutlet weak var passcodeInfoLabel: UILabel!
     @IBOutlet var inputLabel: [UILabel]!
-
     @IBOutlet var digits: [UIButton]! {
         didSet {
             let digitFont = UIFont.systemFont(ofSize: 40, weight: .thin)
@@ -38,11 +37,7 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         }
     }
 
-    private var loginManager = LoginManager() {
-        didSet {
-            loginManager.delegate = self
-        }
-    }
+    private var loginManager = LoginManager()
 
     private var isPasscodeSet        = false
     private var passcodeEntry        = ""
@@ -50,7 +45,10 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
     private var passcodeInput        = ""
     private var isEnteringPasscode   = false
     private var isConfirmingPasscode = false
+    private var isSettingPasscode    = false
     private var inputCounter         = 0
+    private let userName             = "iphoneUser"
+    private var savedPasscode: String?
 
     internal var state: VCstate = .loggedout {
         didSet {
@@ -78,12 +76,21 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loginManager.delegate = self
+
         setBullets()
-//        isPasscodeSet = KeychainHelper.isPasscodeSet()
-        if !isPasscodeSet {
-            state = .enterPasscode
-        } else {
-            state = .loggedout
+
+        do {
+            if let passcode = try KeychainHelper.loadPasscodeFor(userName) {
+                savedPasscode = passcode
+                isPasscodeSet = true
+                state = .loggedout
+            } else {
+                state = .showPassCodePrompt
+            }
+        } catch {
+            state = .showPassCodePrompt
+            fatalError("🔥 Error loading saved passcode from Keychain")
         }
 
     }
@@ -100,14 +107,15 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
     private func promptPasscode() {
         isEnteringPasscode = true
         isConfirmingPasscode = false
-        passcodeInfoLabel.text = "Enter Passcode"
+        passcodeInfoLabel.text = "Set Passcode"
         setBullets()
         inputCounter = 0
         passcodeInput = ""
     }
 
     private func confirmPasscode() {
-        isConfirmingPasscode = true
+        isSettingPasscode = true
+        isConfirmingPasscode = false
         isEnteringPasscode = false
         passcodeInfoLabel.text = "Confirm Passcode"
         setBullets()
@@ -117,6 +125,7 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
 
     private func enterPasscode() {
         isEnteringPasscode = true
+        isSettingPasscode = false
         isConfirmingPasscode = false
         passcodeInfoLabel.text = "Passcode"
         setBullets()
@@ -136,24 +145,32 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
             inputLabel[inputCounter].text = "●"
             passcodeInput.append(digit)
             inputCounter += 1
-            print(passcodeInput)
             if inputCounter == 6 {
                 if isEnteringPasscode {
+                    if savedPasscode == passcodeInput {
+                        state = .loggedin
+                    } else {
+                        passcodeInfoLabel.text = "Passcode doesn't match"
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
+                            self.enterPasscode()
+                        }
+                        return
+                    }
+                }
+                if isSettingPasscode {
                     passcodeEntry = passcodeInput
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         self.confirmPasscode()
                     }
+                    return
                 } else {
                     confirmEntry = passcodeInput
-                    print(passcodeEntry)
-                    print(confirmEntry)
+//                    print(passcodeEntry)
+//                    print(confirmEntry)
                     let isMatch = loginManager.checkIfConfirmMatches(passcodeEntry, confirmEntry)
                     if isMatch {
                         isPasscodeSet = true
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                            self.state = .loggedin
-                        }
+                        loginManager.savePasscodeToKeychain(passcodeEntry)
                     } else {
                         passcodeInfoLabel.text = "Passcode doesn't match"
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {

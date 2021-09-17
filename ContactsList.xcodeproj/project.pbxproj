@@ -154,8 +154,8 @@
 		A5CDEE7526E215CC00D305C6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A5CDEE7126E215BB00D305C6 /* LoginViewController.swift */,
 				A55090B426F3B06B001F89A9 /* LoginManager.swift */,
+				A5CDEE7126E215BB00D305C6 /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
