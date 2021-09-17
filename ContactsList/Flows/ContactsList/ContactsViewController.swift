@@ -74,6 +74,7 @@ class ContactsViewController: UIViewController {
     @IBAction func logoutButtonPressed(_ sender: Any) {
         guard let loginVC = storyboard?.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else { return }
         let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
+        loginVC.state = .loggedout
         window?.rootViewController = loginVC
         window?.makeKeyAndVisible()
     }

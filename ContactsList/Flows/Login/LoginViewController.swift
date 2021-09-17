@@ -44,7 +44,13 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         }
     }
 
-    private var passcodeEntry = ""
+    private var isPasscodeSet        = false
+    private var passcodeEntry        = ""
+    private var confirmEntry         = ""
+    private var passcodeInput        = ""
+    private var isEnteringPasscode   = false
+    private var isConfirmingPasscode = false
+    private var inputCounter         = 0
 
     internal var state: VCstate = .loggedout {
         didSet {
@@ -55,6 +61,9 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
             case .loggedout:
                 print("🍄 Loggedout State")
                 loginManager.loginWithFaceID()
+            case .enterPasscode:
+                print("🔐 Enter Passcode")
+                enterPasscode()
             case .showPassCodePrompt:
                 print("🐷 Prompt Passcode")
                 promptPasscode()
@@ -70,9 +79,9 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         super.viewDidLoad()
 
         setBullets()
-        let isPasscodeSet = KeychainHelper.isPasscodeSet()
+//        isPasscodeSet = KeychainHelper.isPasscodeSet()
         if !isPasscodeSet {
-            state = .showPassCodePrompt
+            state = .enterPasscode
         } else {
             state = .loggedout
         }
@@ -89,7 +98,30 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
     }
 
     private func promptPasscode() {
+        isEnteringPasscode = true
+        isConfirmingPasscode = false
         passcodeInfoLabel.text = "Enter Passcode"
+        setBullets()
+        inputCounter = 0
+        passcodeInput = ""
+    }
+
+    private func confirmPasscode() {
+        isConfirmingPasscode = true
+        isEnteringPasscode = false
+        passcodeInfoLabel.text = "Confirm Passcode"
+        setBullets()
+        inputCounter = 0
+        passcodeInput = ""
+    }
+
+    private func enterPasscode() {
+        isEnteringPasscode = true
+        isConfirmingPasscode = false
+        passcodeInfoLabel.text = "Passcode"
+        setBullets()
+        inputCounter = 0
+        passcodeInput = ""
     }
 
     private func setBullets() {
@@ -98,26 +130,61 @@ class LoginViewController: UIViewController, LoginManagerDelegate {
         }
     }
 
-    private var inputCounter = 0
-
     @IBAction func digitButtonPressed(_ sender: UIButton) {
         if inputCounter < 6 {
-            let digit = String(sender.tag)
+            let digit = sender.titleLabel!.text!
             inputLabel[inputCounter].text = "●"
-            passcodeEntry.append(digit)
+            passcodeInput.append(digit)
             inputCounter += 1
+            print(passcodeInput)
+            if inputCounter == 6 {
+                if isEnteringPasscode {
+                    passcodeEntry = passcodeInput
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        self.confirmPasscode()
+                    }
+                } else {
+                    confirmEntry = passcodeInput
+                    print(passcodeEntry)
+                    print(confirmEntry)
+                    let isMatch = loginManager.checkIfConfirmMatches(passcodeEntry, confirmEntry)
+                    if isMatch {
+                        isPasscodeSet = true
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            self.state = .loggedin
+                        }
+                    } else {
+                        passcodeInfoLabel.text = "Passcode doesn't match"
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
+                            self.promptPasscode()
+                        }
+                    }
+                }
+            }
         } else {
             return
         }
-        print(passcodeEntry)
     }
 
     @IBAction func deleteDigitPressed(_ sender: Any) {
-        print("Backspace pressed")
+        if inputCounter > 0 {
+            inputLabel[inputCounter-1].text = "○"
+            passcodeInput.removeLast()
+            print(passcodeInput)
+            inputCounter -= 1
+        } else {
+            return
+        }
     }
 
     @IBAction func faceIDButtonPressed(_ sender: Any) {
-        print("Face ID pressed")
+        if isPasscodeSet {
+            print("Face ID pressed")
+            state = .loggedout
+        } else {
+            return
+        }
     }
 }
 

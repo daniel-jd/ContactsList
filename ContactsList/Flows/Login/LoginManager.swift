@@ -13,7 +13,7 @@ protocol LoginManagerDelegate: AnyObject {
 }
 
 enum VCstate {
-    case loggedin, loggedout, showPassCodePrompt, normal
+    case loggedin, loggedout, showPassCodePrompt, enterPasscode, normal
 }
 
 struct LoginManager {
@@ -24,6 +24,10 @@ struct LoginManager {
     mutating func evaluatePolicy() {
         context = LAContext()
         context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
+    }
+
+    func checkIfConfirmMatches(_ passcode: String, _ confirmCode: String) -> Bool {
+        return passcode == confirmCode ? true : false
     }
 
     mutating func loginWithFaceID() {
@@ -44,6 +48,9 @@ struct LoginManager {
                     }
                 } else {
                     print(error?.localizedDescription ?? "Failed to authenticate")
+                    DispatchQueue.main.async { [self] in
+                        delegate?.state = .enterPasscode
+                    }
                 }
             }
         } else {
